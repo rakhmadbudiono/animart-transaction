@@ -1,0 +1,23 @@
+.transaction-card {
+  display: flex;
+}
+
+.transaction-details {
+  width: 40vw;
+  display: block;
+  margin-left: 15px;
+}
+
+.right-button {
+  float: right;
+  margin-right: 10px;
+}
+
+.payload {
+  display: flex;
+}
+
+.price {
+  color: red;
+  margin-right: 10px;
+}
