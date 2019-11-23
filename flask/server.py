@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
 import flask
 from flask import request, jsonify
+import psycopg2
 
 def check_result(string):
     return string != '' and "Tunggu" not in string
@@ -84,5 +85,19 @@ def trackReceipt():
         hasil = scraper.scrape(no_resi, nama_kurir)
     
     return jsonify(hasil)
+
+@app.route('/transaction', methods=['GET'])
+def transaction():
+    con = psycopg2.connect(database="animart", user="postgres", password="postgres", host="127.0.0.1", port="5432")
+    print("Database opened successfully")
+
+    cur = con.cursor()
+    cur.execute("SELECT airway_bill, courier FROM stock_move_line")
+    rows = cur.fetchall()
+
+    print("Operation done successfully")
+    con.close()
+
+    return jsonify(rows)
 
 app.run()

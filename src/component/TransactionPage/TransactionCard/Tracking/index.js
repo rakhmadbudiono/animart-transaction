@@ -25,8 +25,7 @@ class Tracking extends Component {
 
     this.setState({
       date: this.state.result.data.delivery_time,
-      history: this.state.result.data.timeline,
-      loaded: true
+      history: this.state.result.data.timeline
     });
   }
 

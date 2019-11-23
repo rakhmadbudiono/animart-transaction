@@ -11,7 +11,9 @@ class TransactionCard extends Component {
       show: false,
       product_name: this.props.product_name,
       price: this.props.price,
-      amount: this.props.amount
+      amount: this.props.amount,
+      awb: this.props.awb,
+      courier: this.props.courier
     };
   }
 
@@ -54,7 +56,7 @@ class TransactionCard extends Component {
         </Card>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
-          <Tracking awb='CGK2H03789568816' courier='jne' />
+          <Tracking awb={this.state.awb} courier={this.state.courier} />
         </Modal>
       </>
     );
