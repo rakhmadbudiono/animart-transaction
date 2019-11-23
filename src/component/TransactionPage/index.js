@@ -27,7 +27,7 @@ class TransactionPage extends Component {
         {this.state.transactions.map(transaction => (
           <TransactionCard
             product_name='{Nama Produk}'
-            price='2.250.000'
+            price='{Harga}'
             amount='{Jumlah}'
             awb={transaction[0]}
             courier={transaction[1]}

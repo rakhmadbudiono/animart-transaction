@@ -26,6 +26,19 @@ class TransactionCard extends Component {
   };
 
   render() {
+    let tracking = (
+      <>
+        <Modal.Header closeButton>
+          <Modal.Title>Tracking</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Nomor Resi Kosong</Modal.Body>
+      </>
+    );
+
+    if (this.state.awb !== null) {
+      tracking = <Tracking awb={this.state.awb} courier={this.state.courier} />;
+    }
+
     return (
       <>
         <Card>
@@ -56,7 +69,7 @@ class TransactionCard extends Component {
         </Card>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
-          <Tracking awb={this.state.awb} courier={this.state.courier} />
+          {tracking}
         </Modal>
       </>
     );
