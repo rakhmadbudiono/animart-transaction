@@ -54,7 +54,7 @@ class TransactionCard extends Component {
         </Card>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
-          <Tracking />
+          <Tracking awb='CGK2H03789568816' courier='jne' />
         </Modal>
       </>
     );

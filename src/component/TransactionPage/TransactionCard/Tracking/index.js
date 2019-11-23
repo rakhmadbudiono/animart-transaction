@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Modal, Table } from "react-bootstrap";
 
 import "./index.css";
@@ -6,12 +7,24 @@ import "./index.css";
 class Tracking extends Component {
   constructor(props) {
     super(props);
-    this.state = { awb: this.props.awb };
+    this.state = {
+      data: null,
+      awb: this.props.awb,
+      date: null,
+      courier: this.props.courier
+    };
   }
 
-  componentDidMount() {}
+  async componentDidMount() {
+    this.setState({
+      data: await axios.get("http://localhost:5000/trackReceipt", {
+        params: { no_resi: this.state.awb, nama_kurir: this.state.courier }
+      })
+    });
+  }
 
   render() {
+    console.log(this.state.data);
     return (
       <>
         <Modal.Header closeButton>
