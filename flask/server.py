@@ -66,6 +66,14 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 scraper = CekResiScraper()
 
+@app.after_request
+
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response
+
 @app.route('/trackReceipt', methods=['GET'])
 def trackReceipt():
     hasil = dict()

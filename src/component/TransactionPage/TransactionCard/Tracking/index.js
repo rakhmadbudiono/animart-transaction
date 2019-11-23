@@ -8,23 +8,29 @@ class Tracking extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      result: null,
       awb: this.props.awb,
       date: null,
-      courier: this.props.courier
+      courier: this.props.courier,
+      history: []
     };
   }
 
   async componentDidMount() {
     this.setState({
-      data: await axios.get("http://localhost:5000/trackReceipt", {
+      result: await axios.get("http://localhost:5000/trackReceipt", {
         params: { no_resi: this.state.awb, nama_kurir: this.state.courier }
       })
+    });
+
+    this.setState({
+      date: this.state.result.data.delivery_time,
+      history: this.state.result.data.timeline,
+      loaded: true
     });
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <>
         <Modal.Header closeButton>
@@ -40,19 +46,17 @@ class Tracking extends Component {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Lokasi</th>
+                  <th>Status</th>
                   <th>Waktu</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                </tr>
+                {this.state.history.map(checkpoint => (
+                  <tr key={checkpoint.Tanggal}>
+                    <td>{checkpoint.Keterangan}</td>
+                    <td>{checkpoint.Tanggal}</td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>
