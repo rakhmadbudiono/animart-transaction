@@ -92,7 +92,7 @@ def transaction():
     print("Database opened successfully")
 
     cur = con.cursor()
-    cur.execute("SELECT airway_bill, courier FROM stock_move_line")
+    cur.execute("SELECT airway_bill, courier, product_name, amount, price FROM stock_move_line")
     rows = cur.fetchall()
 
     print("Operation done successfully")
